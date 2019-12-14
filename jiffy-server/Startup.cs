@@ -26,6 +26,7 @@ namespace jiffy_server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddSignalR();
         }
 
@@ -36,10 +37,16 @@ namespace jiffy_server
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(options => options
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .SetIsOriginAllowed(_ => true));
             
             app.UseSignalR(routes => 
             {
-                routes.MapHub<JiffyHub>("/jiffy-hub");
+                routes.MapHub<JiffyHub>("/jiffy");
             });
         }
     }
