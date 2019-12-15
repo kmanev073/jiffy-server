@@ -21,6 +21,6 @@ namespace jiffy_server
             new WebHostBuilder()
                 .UseKestrel()
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:1337/");
+                .UseUrls("http://0.0.0.0:1337/");
     }
 }
